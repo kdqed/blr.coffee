@@ -2,10 +2,20 @@ from http.server import HTTPServer, BaseHTTPRequestHandler
 import mimetypes
 from pathlib import Path
 
-from build import render_markdown
+from build import reload_template, render_markdown
+
+
+def get_mtime() -> float:
+    return Path('template.html').stat().st_mtime
+    
 
 class BareboneHTTPHandler(BaseHTTPRequestHandler):
     def do_GET(self):
+        
+        if get_mtime() != self.server.last_mtime:
+            reload_template()
+            print('[dev] reloaded template')
+            self.server.last_mtime = get_mtime()
       
         path = self.path.strip('/')
         fileopts = [
@@ -56,6 +66,7 @@ class BareboneHTTPHandler(BaseHTTPRequestHandler):
 def run_server(port=8000):
     server_address = ("", port)
     httpd = HTTPServer(server_address, BareboneHTTPHandler)
+    httpd.last_mtime = get_mtime()
     print(f"Server running on port {port}...")
     try:
         httpd.serve_forever()

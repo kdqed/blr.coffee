@@ -8,6 +8,11 @@ import pyhuml
 env = Environment(autoescape=True)
 template = env.from_string(Path('template.html').read_text())
 
+def reload_template():
+    global template
+    template = env.from_string(Path('template.html').read_text())
+
+
 def render_markdown(md_file_text: str) -> str:
     context = {}
     

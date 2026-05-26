@@ -2,21 +2,43 @@
 <html>
   <head>
     <title>{{ title or 'blr.coffee' }}</title>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="{{meta_description or 'A blog about coffee and other nice things in Bengaluru'}}">
     
     <link rel="shortcut icon" type="image/png" href="/assets/favicon.png">
-    
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">    
     <style>
     
       :root {
         --f1: #35241a;
         --b1: #f1e7e1;
+        
+        --font1: "Inter";
+        --font2: "Indie Flower";
+        
+        --base-size: clamp(16px, 1.6vw, 32px);
+        --max-width: calc(40 * var(--base-size));
+        font-size: var(--base-size);
+        line-height: 200%;
       }
       
       * {
         box-sizing: border-box;
         margin: 0;
         padding: 0;
-        font-family: sans-serif;
+        font-family: var(--font1), sans-serif;
+        font-weight: 400;
+      }
+      
+      a {
+        color: inherit;
+      }
+      
+      b, strong {
+        font-weight: 700;
       }
       
       body {
@@ -30,6 +52,11 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        font-size: 1.4rem;
+        
+        * {
+          font-family: var(--font2);
+        }
         
         .logo-link {
           display: inline-flex;
@@ -50,10 +77,11 @@
         
         a.main {
           display: inline-block;
-          font-size: 0.8rem;
-          padding: 0.5rem 1rem;
+          font-size: 1rem;
+          padding: 0.25rem 1rem;
           background: var(--f1);
           color: var(--b1);
+          border-radius: 0.2rem;
         }
       }
       
@@ -67,8 +95,26 @@
         padding: 1rem;
       }
       
+      h1 {
+        font-size: 1.4rem;
+        font-family: var(--font2);
+        padding-bottom: 1rem;
+        font-weight: 700;
+      }
+      
       h2 {
+        font-size: 1.2rem;
         padding-top: 0.5rem;
+        font-family: var(--font2);
+      }
+      
+      ul {
+        list-style-position: inside;
+      }
+      
+      .publish-meta * {
+        font-family: var(--font2);
+        font-size: 1.2rem;
       }
       
     </style>
@@ -84,7 +130,9 @@
       </nav>
     </header>
     <main>
-      <p>{{date}}</p>
+      <p class="publish-meta">
+        <span>{{date}}</span> / <a href="{{author_link}}">{{author}}</a>
+      </p>
       {{ content | safe }}
     </main>
   </body>
