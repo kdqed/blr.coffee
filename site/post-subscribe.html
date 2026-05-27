@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{{ title or 'blr.coffee' }}</title>
+    <title>blr.coffee</title>
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="{{meta_description or 'A blog about coffee and other nice things in Bengaluru'}}">
+    <meta name="description" content="A blog about coffee and other nice things in Bengaluru">
     
     <link rel="shortcut icon" type="image/png" href="/assets/favicon.png">
 
@@ -185,12 +185,10 @@
       </nav>
     </header>
     <main>
-      {% if is_blog %}
-      <p class="publish-meta">
-        <a href="{{author_link}}">{{author}}</a> | <span>{{date}}</span>
-      </p>
-      {% endif %}
-      {{ content | safe }}
+      
+      <h1>You're Subscribed!</h1>
+<p>Check your inbox, you might have got a link to confirm your subscription.</p>
+
     </main>
     <footer>
       <form

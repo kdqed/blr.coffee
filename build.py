@@ -30,7 +30,7 @@ def build():
         to_write = False
         if not target.exists():
             to_write = True
-        elif path.stat().st_mtime < target.stat().st_mtime:
+        elif path.stat().st_mtime > target.stat().st_mtime:
             to_write = True
         
         if to_write:
