@@ -9,7 +9,7 @@ _Coming Soon_
 
 ## What to Expect
 
-- Caffeinating/caffeinated explorations of the city
+- My accounts of caffeinating/caffeinated explorations of the city
 - Occasional posts about just the city or just coffee
 - Other cool stuff in BLR
 
