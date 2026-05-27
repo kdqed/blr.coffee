@@ -22,3 +22,23 @@ def render_markdown(md_file_text: str) -> str:
     
     context['content'] = nh3.clean(mistune.html(parts[-1]))
     return template.render(**context)
+
+
+def build():
+    for path in Path('.').rglob('*.html.md'):
+        target = path.with_suffix('')
+        to_write = False
+        if not target.exists():
+            to_write = True
+        elif path.stat().st_mtime < target.stat().st_mtime:
+            to_write = True
+        
+        if to_write:
+            print('[generating]', target)
+            content = render_markdown(path.read_text())
+            target.write_text(content)
+        
+
+        
+if __name__ == "__main__":
+    build()
