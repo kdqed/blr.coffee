@@ -3,17 +3,12 @@ author: "@kdqed"
 author_link: "https://kdqed.com"
 
 ---
-# A blog about coffee and other nice things in Bengaluru
+# blr.coffee: Bengaluru-as-a-Cafe
 
 _Coming Soon_
 
-## What to Expect
+**blr.coffee** is not a cafe with an address. It is an experiment to turn the whole city into one. Bengaluru already has a cafe culture, a third place instinct, a habit of good conversation or introspection over coffee. This idea is just trying to make that visible and distributed. 
 
-- My accounts of caffeinating/caffeinated explorations of the city
-- Occasional posts about just the city or just coffee
-- Other cool stuff in BLR
+Expect caffeinated explorations of the city, coffee potlucks, popups, curated music, art, literature, and board games made by Bangaloreans, crowdsourced reading lists. 
 
-## What not to Expect
-
-- Rants/whining about traffic, waterlogging, rent & landlords, cabs cancelling, dating scene, transit to airport etc.
-- And most importantly: **Instant Coffee**
+Every street and park a table, every cup a conversation. No rants about traffic or landlords. Absolutely no instant coffee. Something is brewing...

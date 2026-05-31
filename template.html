@@ -48,6 +48,18 @@
         text-align: center;
       }
       
+      a.main {
+        display: inline-block;
+        font-size: 1rem;
+        padding: 0.25rem 1rem 0.1rem 1rem;
+        background: var(--f1);
+        color: var(--b1);
+        border-radius: 0.2rem;
+        text-decoration: none;
+        font-weight: bold;
+        font-family: var(--font2);
+      }
+      
       header {
         padding: 1rem;
         display: flex;
@@ -76,14 +88,7 @@
           font-weight: bold;
         }
         
-        a.main {
-          display: inline-block;
-          font-size: 1rem;
-          padding: 0.25rem 1rem 0.1rem 1rem;
-          background: var(--f1);
-          color: var(--b1);
-          border-radius: 0.2rem;
-        }
+        
       }
       
       main {
@@ -93,7 +98,7 @@
         gap: 1rem;
         width: 100%;
         max-width: 100vh;
-        min-height: 90vh;
+        min-height: 75vh;
         margin: 2rem 0 1rem 0;
         padding: 1rem;
         border-top: 1px solid var(--f1);
@@ -106,6 +111,10 @@
         flex-direction: column;
         gap: 1rem;
         align-items: center;
+        
+        a.main {
+          margin-top: 0.5rem;
+        }
         
         &>* {
           width: 100%;
@@ -181,7 +190,8 @@
         <b>blr.coffee</b>
       </a>
       <nav>
-        <a href="#subscribe-form" class="main">Subscribe</a>
+        <a href="#subscribe-form" class="main">Get Emails</a>
+        <a href="https://discord.gg/yqDDDEnbY3" class="main">Join Discord</a>
       </nav>
     </header>
     <main>
@@ -193,13 +203,19 @@
       {{ content | safe }}
     </main>
     <footer>
+      <div>
+        <h2>Espresso: The Discord Channel</h2>
+        <p>The Discord is the espresso shot. Fast, live, in the room.</p>
+        <a href="https://discord.gg/yqDDDEnbY3" class="main">Join The Discord</a>
+      </div>
       <form
         action="https://buttondown.com/api/emails/embed-subscribe/blr.coffee"
         method="post"
         class="embeddable-buttondown-form"
         id="subscribe-form"
       >
-        <h2>Subscribe</h2>
+        <h2>Cold Brew: Email Newsletter</h2>
+        <p>The newsletter is the cold brew. Slow, patient, worth the wait. Subscribe and it finds you.</p>
         <label>
           <small>Enter your email:</small>
           <input type="email" name="email" id="bd-email" placeholder="someone@anything.com"/>

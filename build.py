@@ -1,4 +1,5 @@
 from pathlib import Path
+import sys
 
 from jinja2 import Environment
 import mistune
@@ -31,6 +32,8 @@ def build():
         if not target.exists():
             to_write = True
         elif path.stat().st_mtime > target.stat().st_mtime:
+            to_write = True
+        elif '-f' in sys.argv:
             to_write = True
         
         if to_write:
