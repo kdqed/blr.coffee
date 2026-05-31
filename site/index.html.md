@@ -3,11 +3,12 @@ author: "@kdqed"
 author_link: "https://kdqed.com"
 
 ---
-# blr.coffee: Bengaluru-as-a-Cafe
+# blr.coffee: Bengaluru-as-a-Cafe (_Coming Soon_)
 
-_Coming Soon_
 
-**blr.coffee** is not a cafe with an address. It is an experiment to turn the whole city into one. Bengaluru already has a cafe culture, a third place instinct, a habit of good conversation or introspection over coffee. This idea is just trying to make that visible and distributed. 
+> This is not a cafe with an address. It is an experiment to turn the whole city into one. No walls, no fixed location, just the feeling brewing across every corner.
+
+Bengaluru already has a cafe culture, a third place instinct, a habit of good conversation or introspection over coffee. This idea is just trying to make that visible and distributed. 
 
 Expect caffeinated explorations of the city, coffee potlucks, popups, curated music, art, literature, and board games made by Bangaloreans, crowdsourced reading lists. 
 
