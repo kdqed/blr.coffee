@@ -61,4 +61,3 @@ try:
     )
 except Exception as e:
     traceback.print_exc()
-    raise e
