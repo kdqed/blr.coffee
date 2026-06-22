@@ -40,6 +40,7 @@ print(len(results), "Tracks Fetched")
 
 try:
     print(os.getenv("S3_ENDPOINT"), "S#")
+    print()
     csv_buffer = io.StringIO()
     w = csv.DictWriter(csv_buffer, fieldnames=results[0].keys())
     w.writeheader()
@@ -49,7 +50,7 @@ try:
         "s3",
         endpoint_url = os.getenv("S3_ENDPOINT"),
         aws_access_key_id = os.getenv("S3_ACCESS_KEY_ID"),
-        aws_secret_access_key = os.getenv("S3_SECRET_KEY"),
+        aws_secret_access_key = os.getenv("S3_SECRET_KEY"),ce.addIgnoredFile false"
     )
 
     filename = "shazam-top/" + datetime.now().strftime("%Y-%m-%d") + ".csv"
