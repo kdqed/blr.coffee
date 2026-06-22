@@ -4,6 +4,7 @@ import io
 import os
 
 import boto3
+from botocore.config import Config
 from bs4 import BeautifulSoup
 from firecrawl import Firecrawl
 
@@ -47,6 +48,10 @@ s3_client = boto3.client(
     endpoint_url = os.getenv("S3_ENDPOINT"),
     aws_access_key_id = os.getenv("S3_ACCESS_KEY_ID"),
     aws_secret_access_key = os.getenv("S3_SECRET_KEY"),
+    config = Config(
+        request_checksum_calculation="when_required",
+        response_checksum_validation="when_required",
+    )
 )
 
 filename = "shazam-top/" + datetime.now().strftime("%Y-%m-%d") + ".csv"
