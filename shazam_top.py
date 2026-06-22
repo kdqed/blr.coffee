@@ -41,7 +41,7 @@ for div in list(soup.select("div[data-test-id=songItem]")):
 
 
 try:
-
+    print(os.getenv("S3_ENDPOINT"), "S#")
     csv_buffer = io.StringIO()
     w = csv.DictWriter(csv_buffer, fieldnames=results[0].keys())
     w.writeheader()
