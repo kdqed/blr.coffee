@@ -5,23 +5,25 @@ import os
 
 import boto3
 from bs4 import BeautifulSoup
-import niquests
+from firecrawl import Firecrawl
 
-r = niquests.get(
-    'https://www.shazam.com/charts/top-50/india/bengaluru',
-    headers = {'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36'}
-)
 
-soup = BeautifulSoup(r.text, features='html.parser')
+firecrawl = Firecrawl(api_key=os.getenv("FIRECRAWL_API_KEY"))
+r = firecrawl.scrape('https://www.shazam.com/charts/top-50/india/bengaluru', formats=['rawHtml'])
+
+
+soup = BeautifulSoup(r.raw_html, features='html.parser')
 results = []
 
 
 for div in list(soup.select("div[data-test-id=songItem]")):
+    print(len(results)+1)
     title_a = div.select_one('a[data-test-id=charts_userevent_list_songTitle]')
     artist_a = div.select_one('a[data-test-id=charts_userevent_list_artistName]')
     am_a = div.select_one('a[data-test-id=charts_userevent_appleMusicLink]')
-    if len(results)==0:
+    if len(results)==0 and not artist_a:
         artist_a = soup.select_one('#S\\:5 a[data-test-id=charts_userevent_list_artistName]')
+    if len(results)==0 and not am_a:
         am_a = soup.select_one('#S\\:6 a[data-test-id=charts_userevent_appleMusicLink]')
     
     results.append(dict(
@@ -32,6 +34,8 @@ for div in list(soup.select("div[data-test-id=songItem]")):
         artist_link = 'https://shazam.com' + artist_a.get('href'),
         apple_music_link = am_a.get('href').split("?")[0],
     ))
+    print(results[-1])
+    print()
 
 csv_buffer = io.StringIO()
 w = csv.DictWriter(csv_buffer, fieldnames=results[0].keys())
