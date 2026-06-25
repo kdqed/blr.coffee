@@ -6,41 +6,65 @@ import traceback
 
 import boto3
 from botocore.config import Config
-from bs4 import BeautifulSoup
 from firecrawl import Firecrawl
+from scraken import scrape
 
 
 firecrawl = Firecrawl(api_key=os.getenv("FIRECRAWL_API_KEY"))
-r = firecrawl.scrape('https://www.shazam.com/charts/top-50/india/bengaluru', formats=['rawHtml'])
+r = firecrawl.scrape(
+    'https://www.shazam.com/charts/top-50/india/bengaluru', 
+    formats=['rawHtml']
+)
+
+data = scrape(
+    r.raw_html,
+    dict(results=(
+        "div[data-test-id=songItem]",
+        ">list",
+        dict(
+            title = (
+                "a[data-test-id=charts_userevent_list_songTitle]",
+                "aria-label",
+            ),
+            link = (
+                "a[data-test-id=charts_userevent_list_songTitle]",
+                "href",
+            ),
+            artist = (
+                "a[data-test-id=charts_userevent_list_artistName]",
+                "aria-label",
+                None
+            ),
+            artist_link = (
+                "a[data-test-id=charts_userevent_list_artistName]",
+                "href",
+                None
+            ),
+            apple_music_link = (
+                'a[data-test-id=charts_userevent_appleMusicLink]',
+                'href',
+                None
+            ),    
+        )
+    ))
+)
 
 
-soup = BeautifulSoup(r.raw_html, features='html.parser')
+print(len(data['results']), "Tracks Fetched")
+i = 0
 results = []
-
-
-for div in list(soup.select("div[data-test-id=songItem]")):
-    title_a = div.select_one('a[data-test-id=charts_userevent_list_songTitle]')
-    artist_a = div.select_one('a[data-test-id=charts_userevent_list_artistName]')
-    am_a = div.select_one('a[data-test-id=charts_userevent_appleMusicLink]')
-    if len(results)==0 and not artist_a:
-        artist_a = soup.select_one('#S\\:5 a[data-test-id=charts_userevent_list_artistName]')
-    if len(results)==0 and not am_a:
-        am_a = soup.select_one('#S\\:6 a[data-test-id=charts_userevent_appleMusicLink]')
-    
+for r in data['results']:
+    i += 1
     results.append(dict(
-        position = len(results) + 1,
-        title = title_a.get("aria-label"),
-        link = 'https://shazam.com' + title_a.get('href'),
-        artist = artist_a.get("aria-label"),
-        artist_link = 'https://shazam.com' + artist_a.get('href'),
-        apple_music_link = am_a.get('href').split("?")[0],
+        position = i,
+        title = r['title'],
+        link = r['link'],
+        artist = r['artist'],
+        artist_link = r['artist_link'],
+        apple_music_link = r['apple_music_link'],
     ))
 
-print(len(results), "Tracks Fetched")
-
 try:
-    print(os.getenv("S3_ENDPOINT"), "S#")
-    print()
     csv_buffer = io.StringIO()
     w = csv.DictWriter(csv_buffer, fieldnames=results[0].keys())
     w.writeheader()
